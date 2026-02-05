@@ -6,7 +6,7 @@
 [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge\&logo=git\&logoColor=white)]()
 [![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge\&logo=swagger\&logoColor=black)]()
 
-Sou **Paulo Ricardo**, desenvolvedor **Full Stack Júnior** com foco em **C#/.NET**, desenvolvimento de **APIs REST**, **Entity Framework** e **SQL Server**.
+Sou **Paulo Ricardo**, desenvolvedor **Full Stack** com foco em **C#/.NET**, desenvolvimento de **APIs REST**, **Entity Framework** e **SQL Server**.
 
 ---
 
