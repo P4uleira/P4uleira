@@ -6,33 +6,64 @@
 [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)]()
 [![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)]()
 
-Desenvolvedor **Full Stack** com foco em **C#/.NET**, **APIs REST**, **Entity Framework** e **SQL Server**. Busco oportunidades para atuar com desenvolvimento back-end e, cada vez mais, com dados.
+Desenvolvedor **Back end** com foco em **C#/.NET**. Busco oportunidades para atuar com desenvolvimento back-end.
 
+## 📫 Contato
 📫 [LinkedIn](https://www.linkedin.com/in/paulo-r-50a292262/)
 
 ---
 
 ## 🚀 Sobre mim
 
-Formado em **Análise e Desenvolvimento de Sistemas** pela **FATEC Jundiaí**, atualmente cursando **Pós-Graduação em Data Analytics** pela **FIAP**.
+Formado em **Análise e Desenvolvimento de Sistemas** pela **FATEC Jundiaí**, atualmente cursando **Pós-Graduação em Arquitetura de Sistemas .NET + Azure** pela **FIAP**.
 
-No dia a dia, desenvolvo módulos e páginas de sistemas com C# (.NET Framework 4.8), JavaScript, CSS e HTML, além de atuar em implementações e correções de banco de dados (SQL Server) e resolução de chamados técnicos.
+Atualmente atuo com o desenvolvimento e manutenção de produtos de seguro digital pela Olik.
 
 ---
 
 ## ⚙️ Tech Stack
 
-**Back-end:** C# / .NET Framework 4.8 / .NET 6-8 · Python (Django, Flask, Pandas, Numpy, scikit-learn) · APIs REST · Entity Framework Core · JWT
+**Back-end:** C# / .NET Framework 4.8 / .NET 6-10 / CQRS / Entity Framework / SQL Serve / Arquitetura orientada a Eventos / Padrão API Rest (construção e consumo). 
 
 **Front-end:** JavaScript · HTML5 · CSS3 · Angular
 
-**Banco de Dados:** SQL Server (consultas, procedures, views, CTEs, functions) · PostgreSQL
+**Banco de Dados:** SQL Server (consultas, procedures, views, CTEs, functions) / PostgreSQL / MongoDb
 
-**Ferramentas:** Swagger · Git & GitHub · Arquitetura Limpa / DDD
+**Ferramentas:** Swagger / Git & GitHub / Clean Code / Postman
 
 ---
 
 ## 📁 Projetos em destaque
+
+### 🚀 [FGC](https://github.com/P4uleira/FCG-ORCHESTRATION-API) [🔗](https://github.com/P4uleira/FCG-CATALOG-API) [🔗](https://github.com/P4uleira/FCG-USERS-API) [🔗](https://github.com/P4uleira/FCG-NOTIFICATIONS-API) [🔗](https://github.com/P4uleira/FCG-PAYMENTS-API) [🔗](https://github.com/P4uleira/FCG-SERVERLESS-NOTIFICATION-API)
+
+**Problema:** O projeto **FIAP Cloud Games (FCG)** é o desafio da pós-graduação da FIAP que propõe construir, de forma incremental (em fases), uma plataforma de venda e distribuição de jogos digitais — nos moldes de uma Steam simplificada — usando arquitetura de microsserviços. A cada fase, novos requisitos não-funcionais são adicionados (containerização, orquestração, gateway, observabilidade, mensageria, banco NoSQL, arquitetura serverless), simulando a evolução real de um sistema em produção.
+
+**Solução:** A solução foi dividida em microsserviços independentes, cada um em seu próprio repositório, coordenados por um repositório de orquestração que centraliza a infraestrutura (Docker Compose / Kubernetes) e a documentação de como subir e validar tudo:
+
+- **FCG-Users-Api** (porta 8080) — cadastro de usuários, login e emissão de JWT.
+- **FCG-Catalog-Api** (porta 8081) — catálogo de jogos, compra e histórico (MongoDB), com cache em Redis.
+- **FCG-Payments-Api** (porta 8082) — processa o pagamento e publica o evento `PaymentProcessedEvent`.
+- **FCG-Notifications-Api** — versão legada (container 24/7 consumindo RabbitMQ), desativada do cluster na Fase 3.
+- **FCG-Serverless-Notification-Api** — substituiu o serviço acima por duas funções AWS Lambda (`welcome-function` e `purchase-confirmation-function`), acionadas automaticamente via SQS/LocalStack.
+- **FCG-Orchestration-Api** — não é um microsserviço de negócio; reúne os manifestos Kubernetes, o Docker Compose e a documentação de execução ponta a ponta.
+
+O fluxo principal (cadastro → compra → pagamento → notificação) atravessa um API Gateway (Kong), que roteia as requisições e valida o JWT na borda. Eventos de domínio trafegam via RabbitMQ (fluxo interno) e, em paralelo, via Amazon SQS (emulado pelo LocalStack) para disparar as funções serverless — sem invocação manual. Cada API segue DDD, CQRS (MediatR) e Clean Architecture, com persistência via Entity Framework Core (SQL Server) e MongoDB para dados de histórico.
+
+**Ferramentas e tecnologias utilizadas:**
+
+| Categoria | Tecnologias |
+|---|---|
+| Plataforma | .NET 10 (APIs), .NET 8 (Lambdas) |
+| Padrões de arquitetura | DDD, CQRS, MediatR, Clean Architecture |
+| Persistência | Entity Framework Core, SQL Server, MongoDB |
+| Cache | Redis |
+| API Gateway | Kong (modo DB-less, validação JWT) |
+| Mensageria | RabbitMQ, MassTransit, Amazon SQS (AWSSDK.SQS) |
+| Serverless | AWS Lambda, AWS SAM CLI, LocalStack |
+| Observabilidade | Prometheus, Grafana |
+| Segurança | JWT |
+| Infraestrutura | Docker, Docker Compose, Kubernetes, AWS CLI |
 
 ### 🚀 [TaskWave — Sistema de Gerenciamento de Tarefas (TCC)](https://github.com/P4uleira/TCC-TASKWAVE)
 
@@ -44,28 +75,4 @@ No dia a dia, desenvolvo módulos e páginas de sistemas com C# (.NET Framework 
 
 `.NET 8` `EF Core` `JWT` `SQL Server` `Swagger`
 
-> 🔗 *Demo/GIF em breve*
-
-### 🚀 [LaricaBook — Sistema de Receitas](https://github.com/P4uleira/LaricaBook)
-
-**Problema:** organizar e compartilhar receitas de forma simples, sem depender de anotações soltas.
-
-**Solução:** aplicação em **Python (Flask)** com **Cassandra** como banco de dados, front-end responsivo em JavaScript e ambiente de banco containerizado com **Docker**, facilitando setup e portabilidade.
-
-**Resultado:** projeto funcional de ponta a ponta (front + back + banco), usado como estudo prático de bancos NoSQL.
-
-`Python` `Flask` `Cassandra` `Docker`
-
-> 🔗 *Demo/GIF em breve*
-
 ---
-
-## 🎯 O que me motiva
-
-Aprender continuamente, evoluir tecnicamente e transformar necessidades reais em software confiável e bem construído.
-
----
-
-## 📫 Contato
-
-**LinkedIn:** [linkedin.com/in/paulo-r-50a292262](https://www.linkedin.com/in/paulo-r-50a292262/)
